@@ -13,7 +13,11 @@ libraryDependencies ++= Seq(
   jdbc,
   ehcache,
   ws,
-  guice
+  guice,
+  "com.softwaremill.macwire" %% "macros" % "2.3.0" % "provided"
+  /**
+    * provided because needed only in compile time
+    */
 )
 
 // no need to cause we'll not use scalaz in this project
