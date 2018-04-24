@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/osboxes/Desktop/play-scala-seed/conf/routes
-// @DATE:Tue Apr 24 14:10:31 MSK 2018
+// @DATE:Tue Apr 24 15:00:59 MSK 2018
 
 
 package router {
