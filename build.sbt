@@ -3,6 +3,10 @@ version := "1.0-SNAPSHOT"
 scalaVersion := "2.12.2"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
+/**
+  * need to make the fingerprint works
+  * to see fingerprint work u need to start sbt in production mode "runProd"
+  */
 pipelineStages := Seq(digest)
 
 libraryDependencies ++= Seq(
