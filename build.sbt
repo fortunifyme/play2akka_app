@@ -1,17 +1,16 @@
-name := """play-scala-seed"""
-organization := "com.example"
-
+name := """scala-web-project"""
 version := "1.0-SNAPSHOT"
+scalaVersion := "2.12.2"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
+pipelineStages := Seq(digest)
 
-scalaVersion := "2.12.4"
+libraryDependencies ++= Seq(
+  jdbc,
+  ehcache,
+  ws,
+  guice
+)
 
-libraryDependencies += guice
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
-
-// Adds additional packages into Twirl
-//TwirlKeys.templateImports += "com.example.controllers._"
-
-// Adds additional packages into conf/routes
-// play.sbt.routes.RoutesKeys.routesImport += "com.example.binders._"
+// no need to cause we'll not use scalaz in this project
+// resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"

@@ -23,10 +23,18 @@ object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.Html
       {
 
 
-Seq[Any](format.raw/*2.1*/("""
-"""),_display_(/*3.2*/main("Welcome to Play")/*3.25*/ {_display_(Seq[Any](format.raw/*3.27*/("""
-  """),format.raw/*4.3*/("""<h1>Welcome to Play!</h1>
-""")))}),format.raw/*5.2*/("""
+Seq[Any](format.raw/*1.4*/("""
+"""),format.raw/*2.1*/("""<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home</title>
+        <link rel="shortcut icon" type="image/png"
+           href=""""),_display_(/*7.19*/routes/*7.25*/.Assets.versioned("images/favicon.png")),format.raw/*7.64*/("""">
+    </head>
+    <body>
+        <h1>Hello Play</h1>
+    </body>
+</html>
 """))
       }
     }
@@ -43,11 +51,11 @@ Seq[Any](format.raw/*2.1*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Tue Apr 24 14:10:31 MSK 2018
-                  SOURCE: /home/osboxes/Desktop/play-scala-seed/app/views/index.scala.html
-                  HASH: f7d71d8a9f655317469a39627564796bcf2a545b
-                  MATRIX: 722->1|818->4|845->6|876->29|915->31|944->34|1000->61
-                  LINES: 21->1|26->2|27->3|27->3|27->3|28->4|29->5
+                  DATE: Tue Apr 24 16:01:25 MSK 2018
+                  SOURCE: /home/osboxes/IdeaProjects/play_akka_focused/scala-web-project/app/views/index.scala.html
+                  HASH: a94ac0ef6ba0426d8b6d779c5813d762f71d94ab
+                  MATRIX: 722->1|818->3|845->4|1012->145|1026->151|1085->190
+                  LINES: 21->1|26->1|27->2|32->7|32->7|32->7
                   -- GENERATED --
               */
           

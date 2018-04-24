@@ -1,16 +1,17 @@
+
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/home/osboxes/Desktop/play-scala-seed/conf/routes
-// @DATE:Tue Apr 24 15:00:59 MSK 2018
+// @SOURCE:/home/osboxes/IdeaProjects/play_akka_focused/scala-web-project/conf/routes
+// @DATE:Tue Apr 24 16:01:25 MSK 2018
 
 import play.api.routing.JavaScriptReverseRoute
 
 
 import _root_.controllers.Assets.Asset
 
-// @LINE:6
+// @LINE:1
 package controllers.javascript {
 
-  // @LINE:6
+  // @LINE:3
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -18,9 +19,29 @@ package controllers.javascript {
     }
 
   
-    // @LINE:6
-    def at: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.Assets.at",
+    // @LINE:3
+    def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Assets.versioned",
+      """
+        function(file1) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "assets/" + (""" + implicitly[play.api.mvc.PathBindable[Asset]].javascriptUnbind + """)("file", file1)})
+        }
+      """
+    )
+  
+  }
+
+  // @LINE:1
+  class ReverseApplication(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:1
+    def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Application.index",
       """
         function() {
           return _wA({method:"GET", url:"""" + _prefix + """"})
