@@ -1,5 +1,8 @@
 import com.softwaremill.macwire._
 import _root_.controllers.{Application, AssetsComponents}
+import actors.StatsActor
+import actors.StatsActor.Ping
+import akka.actor.{ActorRef, Props}
 import filter.StatsFilter
 import play.api.ApplicationLoader.Context
 import play.api._
@@ -23,17 +26,17 @@ class AppApplicationLoader extends ApplicationLoader {
 }
 
 class AppComponents(context: Context) extends BuiltInComponentsFromContext(context)
-  with AhcWSComponents with AssetsComponents with HttpFiltersComponents  {
+  with AhcWSComponents with AssetsComponents with HttpFiltersComponents {
 
   override lazy val controllerComponents: DefaultControllerComponents = wire[DefaultControllerComponents]
   lazy val prefix: String = "/"
   lazy val router: Router = wire[Routes]
   lazy val applicationController: Application = wire[Application]
 
-  lazy val sunService =  wire[SunService]
-  lazy val weatherService =  wire[WeatherService]
+  lazy val sunService: SunService = wire[SunService]
+  lazy val weatherService: WeatherService = wire[WeatherService]
 
-  applicationLifecycle.addStopHook {()=>
+  applicationLifecycle.addStopHook { () =>
 
 
     Logger.info("The app is about to stop")
@@ -42,11 +45,16 @@ class AppComponents(context: Context) extends BuiltInComponentsFromContext(conte
   /**
     * if you wanna perform some task before application is started
     */
-  val onStart = {
-    Logger.info ("The app is about to start")
+  val onStart: Unit = {
+    Logger.info("The app is about to start")
+    statsActor ! Ping
   }
 
-  lazy val statsFilter:Filter = wire[StatsFilter]
-  override lazy val httpFilters= Seq(statsFilter)
+  lazy val statsFilter: Filter = wire[StatsFilter]
+  override lazy val httpFilters = Seq(statsFilter)
+
+  lazy val statsActor: ActorRef = actorSystem.actorOf(
+    Props(wire[StatsActor]), StatsActor.name)
+
 
 }
